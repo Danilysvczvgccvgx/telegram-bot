@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
 
-bot = telebot.TeleBot("TOKEN")
+bot = telebot.TeleBot("8671958026:AAELbiwVYNeiLi6agJRxc5qoehSC4baBi_A")
 
 # Главное меню
 def main_menu():
