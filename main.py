@@ -3,15 +3,16 @@ from telebot import types
 
 bot = telebot.TeleBot("8684846516:AAEQtSfqzTWAM5juhBqsbQhXZtR2lVIpaFc")
 
+
 # Главное меню
 def main_menu():
     markup = types.InlineKeyboardMarkup(row_width=1)
 
     resources = types.InlineKeyboardButton("🌐 Ресурсы проекта", callback_data="resources")
     download = types.InlineKeyboardButton("📥 Скачать проект", callback_data="download")
-    newbie = types.InlineKeyboardButton("📚 Команды для новичков", callback_data="newbie")
+    commands = types.InlineKeyboardButton("📚 Команды сервера", callback_data="commands")
 
-    markup.add(resources, download, newbie)
+    markup.add(resources, download, commands)
     return markup
 
 
@@ -27,13 +28,10 @@ def back_button():
 def start(message):
 
     text = (
-        "👋 *Приветствую!*\n\n"
-        "🤖 Я официальный бот проекта *VIBE RUSSIA*\n\n"
-        "🎮 Здесь ты можешь найти:\n"
-        "• полезные ресурсы проекта\n"
-        "• информацию о скачивании\n"
-        "• команды для новичков\n\n"
-        "👇 Выбери нужный раздел:"
+        "👋 *Добро пожаловать в VIBE RUSSIA*\n\n"
+        "🤖 Официальный бот проекта.\n"
+        "Здесь вы найдете полезную информацию о сервере.\n\n"
+        "👇 Выберите нужный раздел:"
     )
 
     bot.send_message(
@@ -47,16 +45,14 @@ def start(message):
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
 
-    # Ресурсы
     if call.data == "resources":
 
         text = (
-            "🌐 *Ресурсы проекта VIBE RUSSIA*\n\n"
-            "💬 Наш форум — не кликабельно (временно)\n"
-            "🌍 Наш сайт — не кликабельно (временно)\n"
-            "📢 Наш Telegram — не кликабельно (временно)\n"
-            "📱 Наш VK — не кликабельно (временно)\n\n"
-            "⚙️ Скоро ссылки будут доступны."
+            "🌐 *Ресурсы проекта*\n\n"
+            "Форум — временно недоступно\n"
+            "Сайт — временно недоступно\n"
+            "Telegram — временно недоступно\n"
+            "VK — временно недоступно"
         )
 
         bot.edit_message_text(
@@ -67,13 +63,13 @@ def callback(call):
             reply_markup=back_button()
         )
 
-    # Скачать
+
     elif call.data == "download":
 
         text = (
             "📥 *Скачивание проекта*\n\n"
-            "🚧 Наш проект находится в разработке.\n\n"
-            "📢 Следите за новостями в наших соцсетях:\n\n"
+            "🚧 Проект находится в разработке.\n\n"
+            "Следите за новостями:\n"
             "📱 ВКонтакте — ссылка\n"
             "💬 Telegram — ссылка"
         )
@@ -86,16 +82,61 @@ def callback(call):
             reply_markup=back_button()
         )
 
-    # Команды для новичков
-    elif call.data == "newbie":
+
+    elif call.data == "commands":
 
         text = (
-            "📚 *Команды для новичков*\n\n"
-            "🚧 Этот раздел находится в разработке.\n\n"
-            "Скоро здесь появятся:\n"
-            "• список команд\n"
-            "• гайды по серверу\n"
-            "• помощь новичкам"
+            "📚 *Команды сервера*\n\n"
+
+            "🔹 *ОБЩЕЕ*\n"
+            "/time — узнать точное время\n"
+            "/menu (/mm) — меню игрока\n"
+            "/donat — проверить донат\n"
+            "/donate — донат меню\n"
+            "/gps — GPS навигатор\n"
+            "/referals — приглашенные игроки\n"
+            "/help — помощь\n"
+            "/members — сотрудники online\n"
+            "/leaders — лидеры online\n"
+            "/buy — магазин\n"
+            "/leave — покинуть организацию\n"
+            "/setspawn — место появления\n"
+            "/charity — пожертвования\n"
+            "/liclist — лицензёры online\n"
+            "/adlist — адвокаты online\n"
+            "/news — собеседования\n"
+            "/anim — список анимаций\n"
+            "/yes — согласиться\n"
+            "/no — отказаться\n"
+            "/cancel — отменить заказ\n"
+            "/pay [ID] — передать деньги\n"
+            "/givemet [ID] — передать материалы\n"
+            "/lic [ID] — показать лицензии\n"
+            "/pass [ID] — показать паспорт\n"
+            "/med [ID] — медкарта\n"
+            "/showvb [ID] — военный билет\n"
+            "/skill [ID] — навыки силы\n"
+            "/changeprop [ID] — обмен\n"
+            "/bg — попрошайничать\n"
+            "/ad [текст] — объявление\n"
+            "/inv — инвентарь\n\n"
+
+            "💬 *ЧАТ*\n"
+            "/s — крикнуть\n"
+            "/n — OOC чат\n"
+            "/w — шептать\n"
+            "/c — позвонить\n"
+            "/sms — SMS\n"
+            "/d — департамент\n"
+            "/r — гос чат IC\n"
+            "/rn — гос чат OOC\n"
+            "/f — нелегал чат IC\n"
+            "/fn — нелегал чат OOC\n"
+            "/me — действие от 1 лица\n"
+            "/do — действие от 3 лица\n"
+            "/try — шанс 50%\n"
+            "/todo — речь + действие\n"
+            "/m — мегафон"
         )
 
         bot.edit_message_text(
@@ -106,16 +147,11 @@ def callback(call):
             reply_markup=back_button()
         )
 
-    # Назад
+
     elif call.data == "back":
 
-        text = (
-            "👋 *Главное меню VIBE RUSSIA*\n\n"
-            "Выберите нужный раздел:"
-        )
-
         bot.edit_message_text(
-            text,
+            "👋 *Главное меню VIBE RUSSIA*\n\nВыберите раздел:",
             call.message.chat.id,
             call.message.message_id,
             parse_mode="Markdown",
